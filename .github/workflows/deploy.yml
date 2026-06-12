@@ -34,17 +34,18 @@ jobs:
     - name: 🧾 Mostrar variables básicas (solo locales, no secretos)
       run: |
         echo "Probando conexión SSH con:"
-        echo "Host: ${{ secrets.VPS_UPS }}"
-        echo "Usuario: ${{ secrets.VPS_USER }}"
-        echo "Puerto: ${{ secrets.VPS_PORTUPS }}"
-        echo "Password: ${{ secrets.VPS_PASSWORD }}"
+        echo "Host: ${{ secrets.GHCR_UPS }}"
+        echo "Usuario: ${{ secrets.GHCR_USER }}"
+        echo "Puerto: ${{ secrets.GHCR_PORT }}"
+        echo "Password: ${{ secrets.GHCR_PASSWORD }}"
+
     - name: 🧪 Probar conexión SSH
       uses: appleboy/ssh-action@v1
       with:
-        host: ${{ secrets.VPS_UPS }}
-        username: ${{ secrets.VPS_USER }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        port: ${{ secrets.VPS_VPS_PORTUPS }}
+        host: ${{ secrets.GHCR_UPS }}
+        username: ${{ secrets.GHCR_USER }}
+        password: ${{ secrets.GHCR_PASSWORD }}
+        port: ${{ secrets.GHCR_PORT }}
         script: |
           echo "✅ Conexión exitosa desde GitHub Actions"
           hostname
