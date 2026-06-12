@@ -30,3 +30,23 @@ jobs:
     
     - name: Publicar la imagen creada
       run: docker push ghcr.io/arielmeneses-ux/landinf:2.0.0
+
+    - name: 🧾 Mostrar variables básicas (solo locales, no secretos)
+      run: |
+        echo "Probando conexión SSH con:"
+        echo "Host: ${{ secrets.VPS_HOST }}"
+        echo "Usuario: ${{ secrets.VPS_USER }}"
+        echo "Puerto: ${{ secrets.VPS_PORTUPS }}"
+        echo "Password: ${{ secrets.VPS_PASSWORD }}"
+    - name: 🧪 Probar conexión SSH
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: ${{ secrets.VPS_VPS_PORTUPS }}
+        script: |
+          echo "✅ Conexión exitosa desde GitHub Actions"
+          hostname
+          whoami
+          uptime
