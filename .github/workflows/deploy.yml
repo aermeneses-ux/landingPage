@@ -51,3 +51,4 @@ jobs:
           hostname
           whoami
           uptime
+          touch  ejemploc.txt
