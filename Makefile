@@ -1,2 +1,2 @@
 deploy: 
-	@ docker stack deploy -c stack.yml 
+	@ docker stack deploy -c stack.yml borrar

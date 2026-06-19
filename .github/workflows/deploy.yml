@@ -48,3 +48,16 @@ jobs:
         port: ${{ secrets.GHCR_PORT }}
         source: "stack.yml,Makefile"
         target: "/home/${{ secrets.GHCR_USER }}/landingc"
+
+    - name: pasar los archivos desde git al VPS
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.GHCR_UPS }}
+        username: ${{ secrets.GHCR_USER }}
+        password: ${{ secrets.GHCR_PASSWORD }}
+        port: ${{ secrets.GHCR_PORT }}
+        script: |
+          echo "desplegando los servicios"
+          cd ~/landingc/
+          docker pull ghcr.io/arielmeneses-ux/landinf:2.0.0
+          docker stack deploy -c stack.yml borrar 
