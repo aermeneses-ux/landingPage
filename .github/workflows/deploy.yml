@@ -39,16 +39,12 @@ jobs:
         echo "Puerto: ${{ secrets.GHCR_PORT }}"
         echo "Password: ${{ secrets.GHCR_PASSWORD }}"
 
-    - name: 🧪 Probar conexión SSH
-      uses: appleboy/ssh-action@v1
+    - name: pasar los archivos desde git al VPS
+      uses: appleboy/scp-action@v1
       with:
         host: ${{ secrets.GHCR_UPS }}
         username: ${{ secrets.GHCR_USER }}
         password: ${{ secrets.GHCR_PASSWORD }}
         port: ${{ secrets.GHCR_PORT }}
-        script: |
-          echo "✅ Conexión exitosa desde GitHub Actions"
-          hostname
-          whoami
-          uptime
-          touch  ejemploc.txt
+        source: "stack.yml,Makefile"
+        target: "/home/${{ secrets.GHCR_USER }}/landingc"
